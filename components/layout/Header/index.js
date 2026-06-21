@@ -2,8 +2,9 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Toolbar } from '@mui/material';
-import { NavBar, NavContainer, Logo, NavLinks, NavLink } from './style';
+import { NavBar, NavContainer, NavLinks, NavLink } from './style';
 
 const links = [
   { label: 'Blog', href: '/blog' },
@@ -17,9 +18,16 @@ export default function Header() {
     <NavBar position="fixed" elevation={0}>
       <Toolbar disableGutters>
         <NavContainer maxWidth="lg">
-          <Logo component={Link} href="/">
-            Gist<span>Nex</span>
-          </Logo>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', lineHeight: 0 }}>
+            <Image
+              src="/images/logo-typography.png"
+              alt="GistNex"
+              width={130}
+              height={40}
+              style={{ objectFit: 'contain' }}
+              priority
+            />
+          </Link>
 
           <NavLinks>
             {links.map(({ label, href }) => (

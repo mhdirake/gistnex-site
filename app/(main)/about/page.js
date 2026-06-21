@@ -81,8 +81,8 @@ export default function AboutPage() {
 
         <Box
           sx={{
-            bgcolor: '#EFF6FF',
-            border: '1px solid #DBEAFE',
+            bgcolor: '#F5F0FF',
+            border: '1px solid #DDD6FE',
             borderRadius: 3,
             p: 3.5,
             display: 'flex',

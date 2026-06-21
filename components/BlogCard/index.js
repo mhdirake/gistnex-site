@@ -31,7 +31,7 @@ export default function BlogCard({ post }) {
         transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
         '&:hover': {
           borderColor: 'primary.main',
-          boxShadow: '0 4px 24px rgba(37,99,235,0.08)',
+          boxShadow: '0 4px 24px rgba(124,58,237,0.08)',
         },
       }}
     >
@@ -81,9 +81,9 @@ export default function BlogCard({ post }) {
                   height: 22,
                   fontSize: '0.7rem',
                   fontWeight: 500,
-                  bgcolor: '#EFF6FF',
+                  bgcolor: '#F5F0FF',
                   color: 'primary.main',
-                  border: '1px solid #DBEAFE',
+                  border: '1px solid #DDD6FE',
                 }}
               />
             ))}

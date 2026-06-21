@@ -71,7 +71,7 @@ export default function BlogImageCard({ post, featured = false }) {
         sx={{
           position: 'absolute',
           inset: 0,
-          bgcolor: 'rgba(37,99,235,0.12)',
+          bgcolor: 'rgba(124,58,237,0.12)',
           opacity: 0,
           transition: 'opacity 0.3s ease',
         }}

@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'next/navigation';
-import { Box, CircularProgress, Divider, Grid2, Typography } from '@mui/material';
+import { Box, CircularProgress, Divider, Typography } from '@mui/material';
 import { fetchPosts } from '@/store/slices/postsSlice';
 import BlogImageCard from '@/components/BlogImageCard';
 import SidebarPostItem from '@/components/SidebarPostItem';
@@ -69,9 +69,9 @@ export default function BlogListClient({ searchQuery }) {
   }
 
   return (
-    <Grid2 container spacing={4}>
+    <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 320px' }, gap: 5 }}>
       {/* Main grid */}
-      <Grid2 size={{ xs: 12, md: 8 }}>
+      <Box>
         {filtered.length > 0 && (
           <Typography
             variant="h5"
@@ -109,15 +109,15 @@ export default function BlogListClient({ searchQuery }) {
             )}
           </>
         )}
-      </Grid2>
+      </Box>
 
       {/* Sidebar */}
-      <Grid2 size={{ xs: 12, md: 4 }}>
+      <Box>
         <Box sx={{ position: 'sticky', top: 88 }}>
           <SidebarSection title="Featured" posts={featured} />
           <SidebarSection title="Latest" posts={latest} />
         </Box>
-      </Grid2>
-    </Grid2>
+      </Box>
+    </Box>
   );
 }
