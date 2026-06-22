@@ -4,31 +4,31 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
-      main: '#7C3AED',
-      light: '#9F67F5',
-      dark: '#5B21B6',
+      main: '#A78BFA',
+      light: '#C4B5FD',
+      dark: '#7C3AED',
       contrastText: '#fff',
     },
     secondary: {
-      main: '#00CFFF',
-      light: '#33DAFF',
-      dark: '#0099CC',
-      contrastText: '#fff',
+      main: '#22D3EE',
+      light: '#67E8F9',
+      dark: '#0891B2',
+      contrastText: '#0F172A',
     },
     background: {
-      default: '#F8FAFC',
-      paper: '#FFFFFF',
+      default: '#0B0B14',
+      paper: '#13131F',
     },
     text: {
-      primary: '#0F172A',
-      secondary: '#64748B',
-      disabled: '#94A3B8',
+      primary: '#F1F5F9',
+      secondary: '#94A3B8',
+      disabled: '#475569',
     },
-    divider: '#E2E8F0',
+    divider: '#1E1E35',
     action: {
-      hover: '#F5F0FF',
+      hover: 'rgba(167,139,250,0.08)',
     },
   },
   typography: {
@@ -52,9 +52,10 @@ const theme = createTheme({
           borderRadius: 8,
         },
         containedPrimary: {
-          background: 'linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)',
+          background: 'linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%)',
+          color: '#fff',
           '&:hover': {
-            background: 'linear-gradient(135deg, #9F67F5 0%, #7C3AED 100%)',
+            background: 'linear-gradient(135deg, #C4B5FD 0%, #A78BFA 100%)',
           },
         },
       },

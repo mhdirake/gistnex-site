@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { getBlogPost, getBlogPosts } from '@/lib/api';
 import BlogContent from './_components/BlogContent';
 import BlogPostActions from './_components/BlogPostActions';
+import ShareButtons from './_components/ShareButtons';
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gistnex.com';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -96,6 +99,7 @@ export default async function BlogPostPage({ params }) {
   if (!data?.post) notFound();
 
   const { title, summary, content, coverImage, tags, readTime, publishedAt } = data.post;
+  const postUrl = `${SITE_URL}/blog/${slug}`;
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -110,7 +114,7 @@ export default async function BlogPostPage({ params }) {
             sx={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(to bottom, transparent 40%, rgba(248,250,252,0.95) 100%)',
+              background: 'linear-gradient(to bottom, transparent 40%, rgba(11,11,20,0.97) 100%)',
             }}
           />
         </Box>
@@ -149,14 +153,18 @@ export default async function BlogPostPage({ params }) {
                   key={tag}
                   label={tag}
                   size="small"
+                  component={Link}
+                  href={`/blog/tag/${encodeURIComponent(tag)}`}
+                  clickable
                   sx={{
                     height: 24,
                     fontSize: '0.72rem',
                     fontWeight: 600,
-                    bgcolor: '#F5F0FF',
+                    bgcolor: 'rgba(167,139,250,0.1)',
                     color: 'primary.main',
-                    border: '1px solid #DDD6FE',
+                    border: '1px solid rgba(167,139,250,0.2)',
                     letterSpacing: '0.01em',
+                    '&:hover': { bgcolor: 'rgba(167,139,250,0.2)' },
                   }}
                 />
               ))}
@@ -199,7 +207,8 @@ export default async function BlogPostPage({ params }) {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: 2.5,
+              justifyContent: 'space-between',
+              gap: 2,
               py: 2.5,
               mb: 5,
               borderTop: '1px solid',
@@ -208,22 +217,25 @@ export default async function BlogPostPage({ params }) {
               flexWrap: 'wrap',
             }}
           >
-            {publishedAt && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, color: 'text.secondary' }}>
-                <CalendarTodayOutlined sx={{ fontSize: 14 }} />
-                <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
-                  {formatDate(publishedAt)}
-                </Typography>
-              </Box>
-            )}
-            {readTime && (
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, color: 'text.secondary' }}>
-                <AccessTimeOutlined sx={{ fontSize: 14 }} />
-                <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
-                  {readTime} min read
-                </Typography>
-              </Box>
-            )}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5, flexWrap: 'wrap' }}>
+              {publishedAt && (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, color: 'text.secondary' }}>
+                  <CalendarTodayOutlined sx={{ fontSize: 14 }} />
+                  <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
+                    {formatDate(publishedAt)}
+                  </Typography>
+                </Box>
+              )}
+              {readTime && (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, color: 'text.secondary' }}>
+                  <AccessTimeOutlined sx={{ fontSize: 14 }} />
+                  <Typography variant="body2" sx={{ fontSize: '0.85rem' }}>
+                    {readTime} min read
+                  </Typography>
+                </Box>
+              )}
+            </Box>
+            <ShareButtons title={title} url={postUrl} />
           </Box>
 
           {/* Content */}
@@ -237,6 +249,9 @@ export default async function BlogPostPage({ params }) {
                   key={tag}
                   label={`#${tag}`}
                   size="small"
+                  component={Link}
+                  href={`/blog/tag/${encodeURIComponent(tag)}`}
+                  clickable
                   sx={{
                     height: 26,
                     fontSize: '0.78rem',

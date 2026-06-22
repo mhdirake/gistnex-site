@@ -12,6 +12,9 @@ const inter = Inter({
 export const metadata = {
   title: { default: 'GistNex', template: '%s | GistNex' },
   description: 'Daily tech digest — curated content for developers and tech enthusiasts.',
+  alternates: {
+    types: { 'application/rss+xml': '/feed.xml' },
+  },
 };
 
 export default function RootLayout({ children }) {

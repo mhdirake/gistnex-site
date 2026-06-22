@@ -18,9 +18,9 @@ export default function NewsletterSection() {
     <Box
       component="section"
       sx={{
-        bgcolor: '#0F172A',
+        bgcolor: '#080810',
+        borderTop: '1px solid #1E1E35',
         py: { xs: 8, md: 10 },
-        mt: { xs: 8, md: 10 },
       }}
     >
       <Container maxWidth="sm">

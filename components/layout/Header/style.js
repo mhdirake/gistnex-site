@@ -3,7 +3,7 @@
 import { AppBar, Box, Container, styled } from '@mui/material';
 
 export const NavBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: 'rgba(248,250,252,0.85)',
+  backgroundColor: 'rgba(11,11,20,0.85)',
   backdropFilter: 'blur(12px)',
   WebkitBackdropFilter: 'blur(12px)',
   boxShadow: 'none',
@@ -55,7 +55,7 @@ export const NavLink = styled('a')(({ theme }) => ({
 
   '&:hover': {
     color: theme.palette.text.primary,
-    backgroundColor: theme.palette.action?.hover || '#F1F5F9',
+    backgroundColor: theme.palette.action?.hover,
   },
 
   '&.active': {

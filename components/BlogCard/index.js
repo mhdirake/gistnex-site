@@ -28,6 +28,7 @@ export default function BlogCard({ post }) {
         overflow: 'hidden',
         textDecoration: 'none',
         height: '100%',
+        cursor: 'pointer',
         transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
         '&:hover': {
           borderColor: 'primary.main',
@@ -50,7 +51,7 @@ export default function BlogCard({ post }) {
           sx={{
             height: 192,
             flexShrink: 0,
-            bgcolor: '#F1F5F9',
+            bgcolor: '#1A1A2E',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -77,13 +78,18 @@ export default function BlogCard({ post }) {
                 key={tag}
                 label={tag}
                 size="small"
+                component={Link}
+                href={`/blog/tag/${encodeURIComponent(tag)}`}
+                onClick={(e) => e.stopPropagation()}
+                clickable
                 sx={{
                   height: 22,
                   fontSize: '0.7rem',
                   fontWeight: 500,
-                  bgcolor: '#F5F0FF',
+                  bgcolor: 'rgba(167,139,250,0.1)',
                   color: 'primary.main',
-                  border: '1px solid #DDD6FE',
+                  border: '1px solid rgba(167,139,250,0.2)',
+                  '&:hover': { bgcolor: 'rgba(167,139,250,0.2)' },
                 }}
               />
             ))}

@@ -74,6 +74,7 @@ export default function BlogListPage() {
             onSubmit={handleSearch}
             sx={{
               display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row' },
               gap: 1.5,
               maxWidth: 540,
               mx: 'auto',
@@ -111,6 +112,7 @@ export default function BlogListPage() {
                 fontWeight: 600,
                 flexShrink: 0,
                 boxShadow: 'none',
+                width: { xs: '100%', sm: 'auto' },
                 '&:hover': { boxShadow: 'none' },
               }}
             >

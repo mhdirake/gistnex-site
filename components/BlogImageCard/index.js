@@ -19,7 +19,7 @@ export default function BlogImageCard({ post, featured = false }) {
         borderRadius: 3,
         overflow: 'hidden',
         textDecoration: 'none',
-        height: featured ? 420 : 320,
+        height: 320,
         bgcolor: '#1E293B',
         cursor: 'pointer',
         '&:hover .card-img': { transform: 'scale(1.04)' },

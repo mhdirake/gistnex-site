@@ -29,6 +29,7 @@ export default function TopPostCard({ post }) {
         borderRadius: 3,
         textDecoration: 'none',
         height: '100%',
+        cursor: 'pointer',
         transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
         '&:hover': {
           borderColor: 'primary.main',
@@ -45,9 +46,9 @@ export default function TopPostCard({ post }) {
             height: 22,
             fontSize: '0.7rem',
             fontWeight: 500,
-            bgcolor: '#F5F0FF',
+            bgcolor: 'rgba(167,139,250,0.1)',
             color: 'primary.main',
-            border: '1px solid #DDD6FE',
+            border: '1px solid rgba(167,139,250,0.25)',
           }}
         />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
@@ -56,8 +57,8 @@ export default function TopPostCard({ post }) {
               fontSize: '0.7rem',
               fontWeight: 600,
               color: 'primary.main',
-              bgcolor: '#F5F0FF',
-              border: '1px solid #DDD6FE',
+              bgcolor: 'rgba(167,139,250,0.1)',
+              border: '1px solid rgba(167,139,250,0.25)',
               borderRadius: 1,
               px: 0.75,
               py: 0.2,

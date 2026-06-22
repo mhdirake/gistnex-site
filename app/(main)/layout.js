@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import BackToTop from '@/components/BackToTop';
 
 export default function MainLayout({ children }) {
   return (
@@ -10,6 +11,7 @@ export default function MainLayout({ children }) {
         {children}
       </Box>
       <Footer />
+      <BackToTop />
     </Box>
   );
 }

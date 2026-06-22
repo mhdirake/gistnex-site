@@ -19,6 +19,7 @@ export default function SidebarPostItem({ post }) {
         textDecoration: 'none',
         alignItems: 'flex-start',
         py: 1.75,
+        cursor: 'pointer',
         borderBottom: '1px solid',
         borderColor: 'divider',
         '&:last-child': { borderBottom: 'none' },
@@ -33,7 +34,7 @@ export default function SidebarPostItem({ post }) {
           borderRadius: 1.5,
           overflow: 'hidden',
           flexShrink: 0,
-          bgcolor: '#F1F5F9',
+          bgcolor: '#1A1A2E',
           position: 'relative',
         }}
       >
@@ -55,7 +56,7 @@ export default function SidebarPostItem({ post }) {
               justifyContent: 'center',
             }}
           >
-            <Typography sx={{ fontSize: '0.65rem', fontWeight: 700, color: '#CBD5E1' }}>
+            <Typography sx={{ fontSize: '0.65rem', fontWeight: 700, color: '#475569' }}>
               GN
             </Typography>
           </Box>
