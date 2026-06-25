@@ -15,7 +15,19 @@ export default async function LatestPostsSection() {
   if (!posts.length) return null;
 
   return (
-    <Box sx={{ py: { xs: 8, md: 10 }, borderTop: '1px solid', borderColor: 'divider' }}>
+    <Box sx={{
+      py: { xs: 8, md: 10 },
+      position: 'relative',
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: '4%',
+        right: '4%',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent 0%, rgba(167,139,250,0.2) 35%, rgba(34,211,238,0.13) 65%, transparent 100%)',
+      },
+    }}>
       <Container maxWidth="lg">
         <Box
           sx={{

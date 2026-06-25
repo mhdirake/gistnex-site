@@ -30,7 +30,19 @@ export default async function TopicsSection() {
   if (!topics.length) return null;
 
   return (
-    <Box sx={{ py: { xs: 8, md: 10 }, borderBottom: '1px solid', borderColor: 'divider' }}>
+    <Box sx={{
+      py: { xs: 8, md: 10 },
+      position: 'relative',
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: 0,
+        left: '4%',
+        right: '4%',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent 0%, rgba(167,139,250,0.2) 35%, rgba(34,211,238,0.13) 65%, transparent 100%)',
+      },
+    }}>
       <Container maxWidth="lg">
         {/* Header */}
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 5, flexWrap: 'wrap', gap: 2 }}>

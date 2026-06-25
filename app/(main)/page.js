@@ -7,17 +7,36 @@ import LatestPostsSection from './_components/LatestPostsSection';
 import TopicsSection from './_components/TopicsSection';
 import TopPostsSection from './_components/TopPostsSection';
 import NewsletterSection from './blog/_components/NewsletterSection';
+import { getBlogPosts } from '@/lib/api';
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  let recentPosts = [];
+  try {
+    const data = await getBlogPosts({ limit: 4 });
+    recentPosts = data.posts ?? [];
+  } catch {}
+
   return (
     <Box>
-      <HeroSection />
+      <HeroSection recentPosts={recentPosts} />
 
       {/* Stats */}
       <StatsBar />
 
       {/* Features */}
-      <Box sx={{ py: { xs: 8, md: 10 }, borderBottom: '1px solid', borderColor: 'divider' }}>
+      <Box sx={{
+        py: { xs: 8, md: 10 },
+        position: 'relative',
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          bottom: 0,
+          left: '4%',
+          right: '4%',
+          height: '1px',
+          background: 'linear-gradient(90deg, transparent 0%, rgba(167,139,250,0.2) 35%, rgba(34,211,238,0.13) 65%, transparent 100%)',
+        },
+      }}>
         <Container maxWidth="lg">
           <Box
             sx={{

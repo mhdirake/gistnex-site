@@ -18,14 +18,26 @@ export default async function FeaturedPost() {
   if (!post) return null;
 
   return (
-    <Box sx={{ py: { xs: 8, md: 10 }, borderBottom: '1px solid', borderColor: 'divider' }}>
+    <Box sx={{
+      py: { xs: 8, md: 10 },
+      position: 'relative',
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: 0,
+        left: '4%',
+        right: '4%',
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent 0%, rgba(167,139,250,0.2) 35%, rgba(34,211,238,0.13) 65%, transparent 100%)',
+      },
+    }}>
       <Container maxWidth="lg">
         {/* Section header */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 5 }}>
           <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 700, letterSpacing: '0.12em', fontSize: '0.72rem' }}>
             Featured
           </Typography>
-          <Box sx={{ flex: 1, height: '1px', bgcolor: 'divider' }} />
+          <Box sx={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, rgba(167,139,250,0.2), transparent)' }} />
         </Box>
 
         {/* Card */}

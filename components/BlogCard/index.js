@@ -1,5 +1,5 @@
 import { Box, Chip, Typography } from '@mui/material';
-import { AccessTime } from '@mui/icons-material';
+import { AccessTime, VisibilityOutlined } from '@mui/icons-material';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -11,8 +11,13 @@ function formatDate(iso) {
   });
 }
 
+function formatCount(n) {
+  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+  return String(n);
+}
+
 export default function BlogCard({ post }) {
-  const { title, slug, summary, coverImage, tags, readTime, publishedAt } = post;
+  const { title, slug, summary, coverImage, tags, readTime, publishedAt, viewCount } = post;
 
   return (
     <Box
@@ -99,7 +104,7 @@ export default function BlogCard({ post }) {
         <Typography
           variant="h6"
           sx={{
-            fontSize: '1rem',
+            fontSize: '0.8rem',
             fontWeight: 600,
             color: 'text.primary',
             lineHeight: 1.4,
@@ -147,6 +152,17 @@ export default function BlogCard({ post }) {
                 <AccessTime sx={{ fontSize: 13, color: 'text.disabled' }} />
                 <Typography variant="caption" sx={{ fontSize: '0.78rem' }}>
                   {readTime} min
+                </Typography>
+              </Box>
+            </>
+          )}
+          {viewCount > 0 && (
+            <>
+              <Box sx={{ width: 3, height: 3, borderRadius: '50%', bgcolor: 'text.disabled' }} />
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.4 }}>
+                <VisibilityOutlined sx={{ fontSize: 13, color: 'text.disabled' }} />
+                <Typography variant="caption" sx={{ fontSize: '0.78rem' }}>
+                  {formatCount(viewCount)}
                 </Typography>
               </Box>
             </>

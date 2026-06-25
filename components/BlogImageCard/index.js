@@ -120,6 +120,7 @@ export default function BlogImageCard({ post, featured = false }) {
             lineHeight: 1.35,
             letterSpacing: '-0.02em',
             mb: summary ? 1 : 0,
+            fontSize: '0.92rem',
           }}
         >
           {title}

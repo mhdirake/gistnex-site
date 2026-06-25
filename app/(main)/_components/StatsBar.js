@@ -22,10 +22,19 @@ export default async function StatsBar() {
   return (
     <Box
       sx={{
-        borderBottom: '1px solid',
-        borderColor: 'divider',
         py: 4,
+        position: 'relative',
         bgcolor: 'background.paper',
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          bottom: 0,
+          left: '4%',
+          right: '4%',
+          height: '1px',
+          background:
+            'linear-gradient(90deg, transparent 0%, rgba(167,139,250,0.2) 35%, rgba(34,211,238,0.13) 65%, transparent 100%)',
+        },
       }}
     >
       <Container maxWidth="lg">
@@ -47,8 +56,12 @@ export default async function StatsBar() {
                   xs: i % 2 === 0 ? '1px solid' : 'none',
                   md: i < stats.length - 1 ? '1px solid' : 'none',
                 },
-                borderColor: 'divider',
+                borderImage: {
+                  xs: 'linear-gradient(180deg, transparent 20%, rgba(167,139,250,0.2) 50%, transparent 80%) 1',
+                  md: 'linear-gradient(180deg, transparent 15%, rgba(167,139,250,0.2) 50%, transparent 85%) 1',
+                },
                 borderBottom: { xs: i < 2 ? '1px solid' : 'none', md: 'none' },
+                borderBottomColor: 'rgba(167,139,250,0.1)',
               }}
             >
               <Typography

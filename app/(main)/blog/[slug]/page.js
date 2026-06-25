@@ -7,6 +7,9 @@ import { getBlogPost, getBlogPosts } from '@/lib/api';
 import BlogContent from './_components/BlogContent';
 import BlogPostActions from './_components/BlogPostActions';
 import ShareButtons from './_components/ShareButtons';
+import PostReactions from './_components/PostReactions';
+import PostSummary from './_components/PostSummary';
+import PostChatAgent from './_components/PostChatAgent';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gistnex.com';
 
@@ -98,7 +101,7 @@ export default async function BlogPostPage({ params }) {
   const data = await getBlogPost(slug);
   if (!data?.post) notFound();
 
-  const { title, summary, content, coverImage, tags, readTime, publishedAt } = data.post;
+  const { title, summary, content, coverImage, tags, readTime, publishedAt, viewCount, likeCount, dislikeCount, aiSummary, highlights } = data.post;
   const postUrl = `${SITE_URL}/blog/${slug}`;
 
   return (
@@ -238,8 +241,22 @@ export default async function BlogPostPage({ params }) {
             <ShareButtons title={title} url={postUrl} />
           </Box>
 
+          {/* Quick Summary */}
+          <PostSummary summary={aiSummary} highlights={highlights} />
+
           {/* Content */}
           <BlogContent content={content} />
+
+          {/* Reactions */}
+          <PostReactions
+            slug={slug}
+            initialViewCount={viewCount ?? 0}
+            initialLikeCount={likeCount ?? 0}
+            initialDislikeCount={dislikeCount ?? 0}
+          />
+
+          {/* Floating chat agent */}
+          <PostChatAgent slug={slug} postTitle={title} />
 
           {/* Tags footer */}
           {tags?.length > 0 && (
