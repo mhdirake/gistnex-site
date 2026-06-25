@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import {
   Box,
   Chip,
@@ -14,28 +14,35 @@ import { SearchOutlined } from '@mui/icons-material';
 import { motion, useReducedMotion } from 'framer-motion';
 import BlogListClient from './_components/BlogListClient';
 import NewsletterSection from './_components/NewsletterSection';
+import axiosClient from '@/lib/axiosClient';
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
-
-const QUICK_TOPICS = ['TypeScript', 'Rust', 'React', 'Go', 'Systems', 'DevOps', 'Security', 'AI/ML'];
 
 export default function BlogListPage() {
   const [query, setQuery] = useState('');
   const [submitted, setSubmitted] = useState('');
   const [focused, setFocused] = useState(false);
+  const [activeTag, setActiveTag] = useState('');
+  const [allTags, setAllTags] = useState([]);
   const prefersReduced = useReducedMotion();
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    axiosClient.get('/api/client/blog-tags')
+      .then(({ data }) => setAllTags(data.tags || []))
+      .catch(() => {});
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
     setSubmitted(query.trim());
   };
 
-  const handleTopicClick = (topic) => {
-    setQuery(topic);
-    setSubmitted(topic);
-    inputRef.current?.focus();
+  const handleTagClick = (tag) => {
+    setActiveTag((prev) => prev === tag ? '' : tag);
+    setQuery('');
+    setSubmitted('');
   };
 
   const handleClear = () => {
@@ -329,57 +336,53 @@ export default function BlogListPage() {
             </Box>
           </MotionBox>
 
-          {/* Quick topic chips */}
-          <MotionBox
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.45 }}
-            sx={{
-              mt: 3,
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: 1,
-            }}
-          >
-            {QUICK_TOPICS.map((topic, i) => (
-              <MotionBox
-                key={topic}
-                initial={{ opacity: 0, scale: 0.88 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.35, delay: 0.5 + i * 0.04 }}
-              >
-                <Chip
-                  label={`#${topic}`}
-                  size="small"
-                  onClick={() => handleTopicClick(topic)}
-                  sx={{
-                    height: 26,
-                    fontSize: '0.72rem',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    bgcolor:
-                      submitted === topic
-                        ? 'rgba(167,139,250,0.18)'
-                        : 'rgba(255,255,255,0.04)',
-                    color: submitted === topic ? 'primary.main' : 'text.secondary',
-                    border: '1px solid',
-                    borderColor:
-                      submitted === topic
-                        ? 'rgba(167,139,250,0.4)'
-                        : 'rgba(255,255,255,0.08)',
-                    letterSpacing: '0.02em',
-                    transition: 'all 0.2s ease',
-                    '&:hover': {
-                      bgcolor: 'rgba(167,139,250,0.12)',
-                      borderColor: 'rgba(167,139,250,0.3)',
-                      color: 'primary.main',
-                    },
-                  }}
-                />
-              </MotionBox>
-            ))}
-          </MotionBox>
+          {/* Tag filter chips */}
+          {allTags.length > 0 && (
+            <MotionBox
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.45 }}
+              sx={{
+                mt: 3,
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                gap: 1,
+              }}
+            >
+              {allTags.map((tag, i) => (
+                <MotionBox
+                  key={tag}
+                  initial={{ opacity: 0, scale: 0.88 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.35, delay: 0.5 + i * 0.04 }}
+                >
+                  <Chip
+                    label={`#${tag}`}
+                    size="small"
+                    onClick={() => handleTagClick(tag)}
+                    sx={{
+                      height: 26,
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      bgcolor: activeTag === tag ? 'rgba(167,139,250,0.18)' : 'rgba(255,255,255,0.04)',
+                      color: activeTag === tag ? 'primary.main' : 'text.secondary',
+                      border: '1px solid',
+                      borderColor: activeTag === tag ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.08)',
+                      letterSpacing: '0.02em',
+                      transition: 'all 0.2s ease',
+                      '&:hover': {
+                        bgcolor: 'rgba(167,139,250,0.12)',
+                        borderColor: 'rgba(167,139,250,0.3)',
+                        color: 'primary.main',
+                      },
+                    }}
+                  />
+                </MotionBox>
+              ))}
+            </MotionBox>
+          )}
         </Container>
       </Box>
 
@@ -393,7 +396,7 @@ export default function BlogListPage() {
               </Box>
             }
           >
-            <BlogListClient searchQuery={submitted} />
+            <BlogListClient searchQuery={submitted} activeTag={activeTag} />
           </Suspense>
         </Container>
       </Box>

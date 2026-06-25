@@ -26,17 +26,17 @@ function SidebarSection({ title, posts }) {
   );
 }
 
-export default function BlogListClient({ searchQuery }) {
+export default function BlogListClient({ searchQuery, activeTag }) {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
-  const page = Math.max(1, parseInt(searchParams.get('page')) || 1);
+  const page = activeTag ? 1 : Math.max(1, parseInt(searchParams.get('page')) || 1);
 
   const { items, total, limit, status } = useSelector((state) => state.posts);
   const totalPages = Math.ceil(total / limit);
 
   useEffect(() => {
-    dispatch(fetchPosts({ page, limit: 9 }));
-  }, [dispatch, page]);
+    dispatch(fetchPosts({ page, limit: 9, tag: activeTag || undefined }));
+  }, [dispatch, page, activeTag]);
 
   const filtered = useMemo(() => {
     if (!searchQuery?.trim()) return items;
@@ -79,7 +79,7 @@ export default function BlogListClient({ searchQuery }) {
             color="text.primary"
             sx={{ mb: 3, letterSpacing: '-0.02em' }}
           >
-            {searchQuery ? `Results for "${searchQuery}"` : 'Latest articles'}
+            {activeTag ? `#${activeTag}` : searchQuery ? `Results for "${searchQuery}"` : 'Latest articles'}
           </Typography>
         )}
 

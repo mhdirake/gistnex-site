@@ -3,8 +3,10 @@ import axiosClient from '@/lib/axiosClient';
 
 export const fetchPosts = createAsyncThunk(
   'posts/fetch',
-  async ({ page = 1, limit = 9 } = {}) => {
-    const { data } = await axiosClient.get('/api/client/blog', { params: { page, limit } });
+  async ({ page = 1, limit = 9, tag } = {}) => {
+    const params = { page, limit };
+    if (tag) params.tag = tag;
+    const { data } = await axiosClient.get('/api/client/blog', { params });
     return { ...data, page };
   }
 );
